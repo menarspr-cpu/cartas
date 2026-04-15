@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+
+  --color-surface: #0e0e0f;
+  --color-surface-container-lowest: #141416;
+  --color-surface-container-low: #1a1a1d;
+  --color-surface-container: #212124;
+  --color-surface-container-high: #2b2b2f;
+  --color-surface-container-highest: #36363b;
+  
+  --color-on-surface: #f0f0f2;
+  --color-on-surface-variant: #a1a1aa;
+  
+  --color-primary: #9cff93;
+  --color-on-primary: #00390a;
+  
+  --color-secondary: #00e3fd;
+  --color-on-secondary: #00363d;
+  
+  --color-tertiary: #ac89ff;
+  --color-on-tertiary: #31006e;
+  
+  --color-outline-variant: #44444a;
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-surface-container/40 backdrop-blur-xl border border-outline-variant/20;
+  }
+  
+  .neon-glow-primary {
+    filter: drop-shadow(0 0 8px rgba(156, 255, 147, 0.4));
+  }
+  
+  .neon-glow-secondary {
+    filter: drop-shadow(0 0 8px rgba(0, 227, 253, 0.4));
+  }
+
+  .holographic-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .holographic-sheen::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 45%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.05) 55%,
+      transparent 100%
+    );
+    transform: rotate(-45deg);
+    animation: sheen 6s infinite;
+  }
+
+  @keyframes sheen {
+    0% { transform: translateX(-100%) rotate(-45deg); }
+    20% { transform: translateX(100%) rotate(-45deg); }
+    100% { transform: translateX(100%) rotate(-45deg); }
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  @keyframes scan {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .animate-scan {
+    animation: scan 3s linear infinite;
+  }
+}
